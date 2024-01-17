@@ -9,7 +9,7 @@ const Create = () => {
   const [formError, setFormError] = useState(null);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!name || !created_at) {
       setFormError('Please fill in all the fields correctly.');
@@ -25,9 +25,9 @@ const Create = () => {
         setFormError('Please fill in all the fields correctly.')
       }
       if (data) {
-        console.log(data)
+        // console.log(data)
         setFormError(null)
-        navigate('/')
+        navigate('/',{replace : true})
       }
     }
 

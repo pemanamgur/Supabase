@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />
         <Route path="/:id" element={<Update />} />
-      </Routes> 
+      </Routes>
     </BrowserRouter>
   );
 }

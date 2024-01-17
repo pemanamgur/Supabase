@@ -7,18 +7,25 @@ const Home = () => {
   const [fetchError, setFetchError] = useState(null);
   const [smoothies, setSmoothies] = useState(null);
 
+  const handleDelete = (id)=>{
+    setSmoothies(prevSmoothie => {
+      return prevSmoothie.filter(sm => sm.id !== id)
+    })
+  }
+ 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data, error } = await supabase.from("Supa").select("*");
-         console.log(data)
+        //  console.log(data)
         if (error) {
           throw new Error("Couldn't fetch data");
         }
         setSmoothies(data);
         setFetchError(null);
       } catch (error) {
-        console.error(error.message);
+        // console.error(error.message);
         setFetchError("Couldn't fetch data");
         setSmoothies(null);
       }
@@ -27,7 +34,7 @@ const Home = () => {
     fetchData();
   }, []);
 
-  console.log(smoothies);
+  // console.log(smoothies);
 
   return (
     <div className="page home">
@@ -35,9 +42,11 @@ const Home = () => {
       {smoothies && (
         <div className="smoothies">
           {/* order by button */}
-          {smoothies.map(smoothie=> (
-            <div className="smoothie-grid">
-                  <SmoothieCard key={smoothie.id} smoothie={smoothie} />
+          {smoothies.map((smoothie,i)=> (
+            <div className="smoothie-grid" key={i}>
+                  <SmoothieCard  smoothie={smoothie} 
+                   onDelete={handleDelete}
+                  />
             </div>
           ))}
         </div>
